@@ -124,6 +124,8 @@ public class GameService {
 
     public Game save(PatchGameRequest patchGameRequest, long id) {
         Game game = findById(id);
+        String finalRating;
+        String finalStatus;
 
         if (patchGameRequest.title() != null)
             if (!patchGameRequest.title().isBlank()) {
@@ -137,8 +139,12 @@ public class GameService {
             } else {
                 throw new InvalidGameDataException("Piattaforma vuota");
             }
-        if (patchGameRequest.status() != null)
+        if (patchGameRequest.status() != null) {
+            if(game.getStatus() == GameStatus.COMPLETED && patchGameRequest.status() != GameStatus.COMPLETED) {
+                throw new InvalidGameDataException("Il gioco è stato completato gia");
+            }
             game.setStatus(patchGameRequest.status());
+        }
         if (patchGameRequest.rating() != null)
             game.setRating(patchGameRequest.rating());
 

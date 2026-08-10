@@ -15,7 +15,7 @@ public record CreateGameRequest(
         @NotNull
         GameStatus status,
 
-        @NotNull
+
         @Min(value = 1)
         @Max(value = 10)
         @Positive
