@@ -68,7 +68,7 @@ public class GlobalExceptionHandler {
     ) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         APIError apiError = new APIError(
-                "VALIDATION_STRING",
+                "INVALID_GAME_DATA",
                 exception.getMessage(),
                 URI.create(request.getRequestURI()).toString(),
                 status
