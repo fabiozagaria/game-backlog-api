@@ -1,4 +1,11 @@
 package org.esercizi.gamebacklog.dto;
 
-public record PatchGameRequest() {
+import org.esercizi.gamebacklog.model.GameStatus;
+
+public record PatchGameRequest(
+        String title,
+        String platform,
+        GameStatus status,
+        Integer rating
+) {
 }

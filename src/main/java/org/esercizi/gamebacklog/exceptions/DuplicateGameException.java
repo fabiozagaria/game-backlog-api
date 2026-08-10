@@ -1,7 +1,7 @@
 package org.esercizi.gamebacklog.exceptions;
 
 public class DuplicateGameException extends RuntimeException {
-  public DuplicateGameException(String message) {
-    super(message);
-  }
+    public DuplicateGameException(String message) {
+        super(message);
+    }
 }
