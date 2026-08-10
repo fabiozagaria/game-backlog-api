@@ -124,8 +124,7 @@ public class GameService {
 
     public Game save(PatchGameRequest patchGameRequest, long id) {
         Game game = findById(id);
-        String finalRating;
-        String finalStatus;
+
 
         if (patchGameRequest.title() != null)
             if (!patchGameRequest.title().isBlank()) {
