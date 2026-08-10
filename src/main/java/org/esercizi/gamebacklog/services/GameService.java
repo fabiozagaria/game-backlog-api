@@ -146,6 +146,13 @@ public class GameService {
     }
 
     public Game addGame(CreateGameRequest gameRequest) {
+
+        if((gameRequest.status() == GameStatus.BACKLOG && gameRequest.rating() != null)
+            || gameRequest.status() == GameStatus.COMPLETED && gameRequest.rating() == null) {
+            throw new InvalidGameDataException("Status e Rating non sono coerenti");
+        }
+
+
         if(!existsGame(gameRequest)) {
             Game game = toGame(gameRequest);
             game.setId(idCounter++);

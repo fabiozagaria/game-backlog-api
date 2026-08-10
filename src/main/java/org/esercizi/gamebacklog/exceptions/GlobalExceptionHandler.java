@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidGameDataException.class)
-    public ResponseEntity<APIError> handleMethodArgumentNotValid(
+    public ResponseEntity<APIError> handleInvalidGameData(
             InvalidGameDataException exception,
             HttpServletRequest request
     ) {
