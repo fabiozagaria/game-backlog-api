@@ -4,7 +4,7 @@ import org.esercizi.gamebacklog.dto.CreateGameRequest;
 import org.esercizi.gamebacklog.dto.PatchGameRequest;
 import org.esercizi.gamebacklog.exceptions.DuplicateGameException;
 import org.esercizi.gamebacklog.exceptions.GameNotFoundException;
-import org.esercizi.gamebacklog.exceptions.IllegalValidArgomentGameException;
+import org.esercizi.gamebacklog.exceptions.InvalidGameDataException;
 import org.esercizi.gamebacklog.model.Game;
 import org.esercizi.gamebacklog.model.GameStatus;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -131,13 +129,13 @@ public class GameService {
             if (!patchGameRequest.title().isBlank()) {
                 game.setTitle(patchGameRequest.title());
             } else {
-                throw new IllegalValidArgomentGameException("Titolo vuoto");
+                throw new InvalidGameDataException("Titolo vuoto");
             }
         if (patchGameRequest.platform() != null)
             if (!patchGameRequest.platform().isBlank()) {
                 game.setPlatform(patchGameRequest.platform());
             } else {
-                throw new IllegalValidArgomentGameException("Piattaforma vuota");
+                throw new InvalidGameDataException("Piattaforma vuota");
             }
         if (patchGameRequest.status() != null)
             game.setStatus(patchGameRequest.status());
