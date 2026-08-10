@@ -63,4 +63,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, status);
     }
 
+    @ExceptionHandler(IllegalValidArgomentGameException.class)
+    public ResponseEntity<APIError> handleMethodArgumentNotValid(
+            IllegalValidArgomentGameException exception,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        APIError apiError = new APIError(
+                "VALIDATION_STRING",
+                exception.getMessage(),
+                URI.create(request.getRequestURI()).toString(),
+                status
+
+        );
+        return new ResponseEntity<>(apiError, status);
+    }
+
 }

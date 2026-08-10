@@ -18,6 +18,7 @@ public record CreateGameRequest(
         @NotNull
         @Min(value = 1)
         @Max(value = 10)
+        @Positive
         Integer rating,
 
         @NotNull

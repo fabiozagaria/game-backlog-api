@@ -4,6 +4,7 @@ import org.esercizi.gamebacklog.dto.CreateGameRequest;
 import org.esercizi.gamebacklog.dto.PatchGameRequest;
 import org.esercizi.gamebacklog.exceptions.DuplicateGameException;
 import org.esercizi.gamebacklog.exceptions.GameNotFoundException;
+import org.esercizi.gamebacklog.exceptions.IllegalValidArgomentGameException;
 import org.esercizi.gamebacklog.model.Game;
 import org.esercizi.gamebacklog.model.GameStatus;
 import org.springframework.stereotype.Service;
@@ -127,9 +128,17 @@ public class GameService {
         Game game = findById(id);
 
         if (patchGameRequest.title() != null)
-            game.setTitle(patchGameRequest.title());
+            if (!patchGameRequest.title().isBlank()) {
+                game.setTitle(patchGameRequest.title());
+            } else {
+                throw new IllegalValidArgomentGameException("Titolo vuoto");
+            }
         if (patchGameRequest.platform() != null)
-            game.setPlatform(patchGameRequest.platform());
+            if (!patchGameRequest.platform().isBlank()) {
+                game.setPlatform(patchGameRequest.platform());
+            } else {
+                throw new IllegalValidArgomentGameException("Piattaforma vuota");
+            }
         if (patchGameRequest.status() != null)
             game.setStatus(patchGameRequest.status());
         if (patchGameRequest.rating() != null)
@@ -151,9 +160,10 @@ public class GameService {
     }
 
     public void removeById(long id) {
-        gameList.removeIf(
+       boolean removed =  gameList.removeIf(
                 game -> game.getId().equals(id)
         );
+       if(!removed) throw new GameNotFoundException("Id non trovato in memoria");
     }
 
     public boolean existsGame(CreateGameRequest newGame) {

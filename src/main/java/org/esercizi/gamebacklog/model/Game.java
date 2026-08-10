@@ -21,6 +21,7 @@ public class Game {
     @NotNull
     @Min(value = 1)
     @Max(value = 10)
+    @Positive
     private Integer rating;
 
     @NotNull
