@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(GameNotFoundException.class)
     public ResponseEntity<APIError> handleNotFoundGame(
-            DuplicateGameException exception,
+            GameNotFoundException exception,
             HttpServletRequest request
     ) {
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<APIError> handleMethodArgumentNotValid(
-            DuplicateGameException exception,
+            MethodArgumentNotValidException exception,
             HttpServletRequest request
     ) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
